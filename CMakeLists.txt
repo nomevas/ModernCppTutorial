@@ -1,0 +1,3 @@
+project(ModernCppTutorial)
+
+include(examples)
