@@ -1,8 +1,14 @@
 #include <gtest/gtest.h>
 
-TEST(TestNullptr, IsSameAsNull_Not) { 
+TEST(TestNullptr, IsSameAsNull_False) { 
+    auto temp =  std::is_same_v<decltype(nullptr), std::nullptr_t>;
     const auto IsSameAsNull = std::is_same<decltype(NULL), decltype(nullptr)>::value; 
     EXPECT_FALSE(IsSameAsNull) << "decltype(nullptr) != decltype(nullptr)";
+}
+
+TEST(TestNullptr, IsSameAsStdNullptrT_True) { 
+    const auto isSameAsNullPtrT =  std::is_same_v<decltype(nullptr), std::nullptr_t>;
+    EXPECT_TRUE(isSameAsNullPtrT) << "decltype(nullptr) != std::nullptr_t";
 }
 
 int foo(char*) {

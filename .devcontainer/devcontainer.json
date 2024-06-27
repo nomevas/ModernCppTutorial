@@ -12,8 +12,7 @@
 				"ms-vscode.cpptools",
 				"ms-vscode.cpptools-extension-pack",
 				"BazelBuild.vscode-bazel",
-				"ms-azuretools.vscode-docker",
-				"DavidSchuldenfrei.gtest-adapter"
+				"ms-azuretools.vscode-docker"
 			]
 		}
 	}
