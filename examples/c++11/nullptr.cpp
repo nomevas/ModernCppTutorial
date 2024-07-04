@@ -1,3 +1,8 @@
+// The purpose of nullptr appears to replace NULL. There are null pointer constants in the C and C++ languages, which can be implicitly converted 
+// to null pointer value of any pointer type, or null member pointer value of any pointer-to-member type in C++. NULL is provided by the standard 
+// library implementation and defined as an implementation-defined null pointer constant. In C, some standard libraries defines NULL as ((void*)0) 
+// and some define it as 0.
+
 #include <gtest/gtest.h>
 
 TEST(Nullptr, IsSameAsNull_False) { 
