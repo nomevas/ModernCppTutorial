@@ -8,7 +8,7 @@ constexpr int fibonacci(const int n) {
     return n == 1 || n == 2 ? 1 : fibonacci(n-1) + fibonacci(n-2);
 }
 
-TEST(ConstExpr, StoreInConstExprVariable_ReturnValueInconstantTime) {
+TEST(ConstExpr, StoreInConstExprVariable_RunInCompileTime) {
     auto start_t = clock();
     constexpr auto compile_time_perf = fibonacci(20);
     auto end_t = clock();
