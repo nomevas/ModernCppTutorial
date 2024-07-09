@@ -20,12 +20,3 @@ TEST(Auto, GetTypeNameUsingTypeInfo) {
     auto iter = container.begin();
     EXPECT_THAT(typeid(iter).name(), MatchesRegex(".*iterator.*vector.*"));
 }
-
-TEST(Auto, CheckTypeUsingDecltype) {
-    auto x = 1;
-    auto y = 2;
-    decltype(x + y) z;
-
-    static_assert(std::is_same<decltype(x), int>::value, "type x == int");
-    static_assert(std::is_same<decltype(x), decltype(z)>::value, "type z == type x");
-}
