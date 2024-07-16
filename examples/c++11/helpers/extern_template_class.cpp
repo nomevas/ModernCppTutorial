@@ -2,9 +2,9 @@
 
 #include <typeinfo>
 
-template<class T>
+template <class T>
 const char* ExternTemplateClass<T>::type_info() {
-    return typeid(T).name();
+  return typeid(T).name();
 }
 
 // force instantiation

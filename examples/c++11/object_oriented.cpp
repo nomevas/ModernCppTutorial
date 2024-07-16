@@ -6,37 +6,38 @@
 
 #include <gtest/gtest.h>
 
-class DelegateConstructorClass {
- public:
-  DelegateConstructorClass() : DelegateConstructorClass(0){};
-  DelegateConstructorClass(int value1) : DelegateConstructorClass(value1, 0) {}
-  DelegateConstructorClass(int value1, int value2) : value1(value1), value2(value2) {}
-  auto operator()() const { return std::make_tuple(value1, value2); }
-
- private:
-  int value1 = -1;
-  int value2 = -1;
-};
-
 TEST(ObjectOriented, DelegateConstructor) {
-  EXPECT_EQ(std::make_tuple(0, 0), DelegateConstructorClass{}());
-  EXPECT_EQ(std::make_tuple(1, 0), DelegateConstructorClass{1}());
-  EXPECT_EQ(std::make_tuple(1, 2), (DelegateConstructorClass{1, 2}()));
+  class Class {
+   public:
+    Class() : Class(0){};
+    Class(int value1) : Class(value1, 0) {}
+    Class(int value1, int value2) : value1(value1), value2(value2) {}
+    auto operator()() const { return std::make_tuple(value1, value2); }
+
+   private:
+    int value1 = -1;
+    int value2 = -1;
+  };
+
+  EXPECT_EQ(std::make_tuple(0, 0), Class{}());
+  EXPECT_EQ(std::make_tuple(1, 0), Class{1}());
+  EXPECT_EQ(std::make_tuple(1, 2), (Class{1, 2}()));
 }
 
-class InheritanceConstructorBase {
- public:
-  int value1 = -1;
-  InheritanceConstructorBase() : value1{5} {}
-  auto operator()() const { return value1; }
-};
+TEST(ObjectOriented, InheritanceConstructor) {
+  class InheritanceConstructorBase {
+   public:
+    int value1 = -1;
+    InheritanceConstructorBase() : value1{5} {}
+    auto operator()() const { return value1; }
+  };
 
-class InheritanceConstructorSubclass : public InheritanceConstructorBase {
- public:
-  using InheritanceConstructorBase::InheritanceConstructorBase;  // inheritance constructor
-};
-
-TEST(ObjectOriented, InheritanceConstructor) { EXPECT_EQ(5, InheritanceConstructorSubclass{}()); }
+  class InheritanceConstructorSubclass : public InheritanceConstructorBase {
+   public:
+    using InheritanceConstructorBase::InheritanceConstructorBase;  // inheritance constructor
+  };
+  EXPECT_EQ(5, InheritanceConstructorSubclass{}());
+}
 
 struct ExplicitDeletedCreatedConstructors {
   ExplicitDeletedCreatedConstructors() = default;                                                     // explicit let compiler use default constructor

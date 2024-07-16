@@ -2,13 +2,13 @@
 
 #include <gtest/gtest.h>
 
-template<typename T>
+template <typename T>
 auto add_some_value(const T& t) {
-    if constexpr (std::is_integral<T>::value) {
-        return t + 1;
-    } else {
-        return t + 0.01;
-    }
+  if constexpr (std::is_integral<T>::value) {
+    return t + 1;
+  } else {
+    return t + 0.01;
+  }
 }
 
 // At compile time, the actual code will behave as follows:
@@ -20,6 +20,6 @@ auto add_some_value(const T& t) {
 // }
 
 TEST(IfConstexpr, CompileTimeIfConditino) {
-    EXPECT_EQ(6, add_some_value(5));
-    EXPECT_EQ(3.15, add_some_value(3.14));
+  EXPECT_EQ(6, add_some_value(5));
+  EXPECT_EQ(3.15, add_some_value(3.14));
 }

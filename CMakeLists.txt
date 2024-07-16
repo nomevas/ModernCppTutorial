@@ -23,7 +23,8 @@ add_test(examples/c++11/using_alias.cpp)
 add_test(examples/c++11/variadic_template.cpp)
 add_test(examples/c++11/object_oriented.cpp)
 add_test(examples/c++11/strongly_typed_enumerations.cpp)
-add_test(examples/c++11/extern_template.cpp examples/c++11/extern_template_class.cpp examples/c++11/extern_template_class.h)
+add_test(examples/c++11/extern_template.cpp examples/c++11/helpers/extern_template_class.cpp)
+add_test(examples/c++11/lambda.cpp)
 
 # C++17 Features
 add_test(examples/c++17/if_constexpr.cpp)
