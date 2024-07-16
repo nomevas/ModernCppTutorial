@@ -20,6 +20,9 @@ add_test(examples/c++11/tuple.cpp)
 add_test(examples/c++11/decltype.cpp)
 add_test(examples/c++11/range_loop.cpp)
 add_test(examples/c++11/using_alias.cpp)
+add_test(examples/c++11/variadic_template.cpp)
+add_test(examples/c++11/object_oriented.cpp)
+add_test(examples/c++11/strongly_typed_enumerations.cpp)
 add_test(examples/c++11/extern_template.cpp examples/c++11/extern_template_class.cpp examples/c++11/extern_template_class.h)
 
 # C++17 Features
