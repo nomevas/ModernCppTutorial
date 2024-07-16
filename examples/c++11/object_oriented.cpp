@@ -25,46 +25,52 @@ TEST(ObjectOriented, DelegateConstructor) {
 }
 
 TEST(ObjectOriented, InheritanceConstructor) {
-  class InheritanceConstructorBase {
+  class Base {
    public:
     int value1 = -1;
-    InheritanceConstructorBase() : value1{5} {}
+    Base() : value1{5} {}
     auto operator()() const { return value1; }
   };
 
-  class InheritanceConstructorSubclass : public InheritanceConstructorBase {
+  class Class : public Base {
    public:
-    using InheritanceConstructorBase::InheritanceConstructorBase;  // inheritance constructor
+    using Base::Base;  // inheritance constructor
   };
-  EXPECT_EQ(5, InheritanceConstructorSubclass{}());
+  EXPECT_EQ(5, Class{}());
 }
 
-struct ExplicitDeletedCreatedConstructors {
-  ExplicitDeletedCreatedConstructors() = default;                                                     // explicit let compiler use default constructor
-  ExplicitDeletedCreatedConstructors& operator=(const ExplicitDeletedCreatedConstructors&) = delete;  // explicit declare refuse constructor
-  ExplicitDeletedCreatedConstructors(int value) : value(value){};
-  int value = -1;
-};
+TEST(ObjectOriented, ForceGeneratingDefaultConstructor) {
+  struct Class {
+    Class() = default;                        // explicit let compiler use default constructor
+    Class& operator=(const Class&) = delete;  // explicit declare refuse constructor
+    Class(int value) : value(value){};
+    int value = -1;
+  };
 
-TEST(ObjectOriented, ForceGeneratingDefaultConstructor) { EXPECT_EQ(-1, ExplicitDeletedCreatedConstructors{}.value); }
+  EXPECT_EQ(-1, Class{}.value);
+}
 
-struct OverrideBase {
-  virtual int foo(int) = 0;
-};
+TEST(ObjectOriented, CheckIfMethodIsDeclaredAsVirtualInBaseClass) {
+  struct Base {
+    virtual int foo(int) = 0;
+  };
 
-struct OverrideSubClass : OverrideBase {
-  int foo(int value) override { return value; };  // legal
-  // virtual void foo(float) override {}; illegal, no virtual function in super class
-};
+  struct Class : Base {
+    int foo(int value) override { return value; };  // legal
+    // virtual void foo(float) override {}; illegal, no virtual function in super class
+  };
 
-TEST(ObjectOriented, CheckIfMethodIsDeclaredAsVirtualInBaseClass) { EXPECT_EQ(5, OverrideSubClass{}.foo(5)); }
+  EXPECT_EQ(5, Class{}.foo(5));
+}
 
-struct PreventTheClassFromBeingContinuedToInheritBase {
-  virtual int foo(int) = 0;
-};
+TEST(ObjectOriented, PreventTheClassFromBeingContinuedToInherit) {
+  struct Base {
+    virtual int foo(int) = 0;
+  };
 
-struct PreventTheClassFromBeingContinuedToInheritSubClass : PreventTheClassFromBeingContinuedToInheritBase {
-  int foo(int value) final { return value; };
-};
+  struct Class : Base {
+    int foo(int value) final { return value; };
+  };
 
-TEST(ObjectOriented, PreventTheClassFromBeingContinuedToInherit) { EXPECT_EQ(5, PreventTheClassFromBeingContinuedToInheritSubClass{}.foo(5)); }
+  EXPECT_EQ(5, Class{}.foo(5));
+}

@@ -7,14 +7,14 @@ auto FunctionThatReturnsMultipleValues(Ts... args) {
   return std::make_tuple(args...);
 }
 
-TEST(Tuple, FunctionThatReturnsMultipleValues_storeResultInLocalVariables) {
+TEST(Tuple, StructuredBindingDeclaration) {
   auto [integer, string, number] = FunctionThatReturnsMultipleValues(1, "test", 2.0);
   EXPECT_EQ(1, integer);
   EXPECT_STREQ("test", string);
   EXPECT_EQ(2.0, number);
 }
 
-TEST(Tuple, FunctionThatReturnsMultipleValues_reuseExistingVariables) {
+TEST(Tuple, StdTie) {
   int integer = 0;
   const char* string = nullptr;
   double number = 0;
