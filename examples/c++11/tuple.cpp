@@ -1,5 +1,7 @@
+#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include <set>
 #include <tuple>
 
 template <class... Ts>
@@ -48,4 +50,19 @@ TEST(Tuple, Iterate_Recursive) {
     std::cout.rdbuf(cout_buff);
   }
   EXPECT_EQ(oss.str(), "0\na\n3.14\n");
+}
+
+TEST(Tuple, Typle_CompareOperators_CompareFirst_ThenSecond_ThenThird_etc) {
+  std::set<std::tuple<int, double, std::string>, std::greater<std::tuple<int, double, std::string>>> tuple_set;
+  tuple_set.insert(std::make_tuple(0, 1, "1"));
+  tuple_set.insert(std::make_tuple(0, 1, "0"));
+  tuple_set.insert(std::make_tuple(0, 0, "1"));
+  tuple_set.insert(std::make_tuple(0, 0, "0"));
+  tuple_set.insert(std::make_tuple(1, 1, "1"));
+  tuple_set.insert(std::make_tuple(1, 1, "0"));
+  tuple_set.insert(std::make_tuple(1, 0, "1"));
+  tuple_set.insert(std::make_tuple(1, 0, "0"));
+
+  EXPECT_THAT(tuple_set, testing::ElementsAre(std::make_tuple(1, 1, "1"), std::make_tuple(1, 1, "0"), std::make_tuple(1, 0, "1"), std::make_tuple(1, 0, "0"),
+                                              std::make_tuple(0, 1, "1"), std::make_tuple(0, 1, "0"), std::make_tuple(0, 0, "1"), std::make_tuple(0, 0, "0")));
 }
