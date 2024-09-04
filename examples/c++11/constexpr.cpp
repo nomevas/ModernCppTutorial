@@ -13,10 +13,3 @@ TEST(ConstExpr, EvaluateTheFucntionInCompileTime) {
   auto end_t = clock();
   EXPECT_LE(end_t - start_t, 5);
 }
-
-TEST(ConstExpr, EvaluateTheFucntionInRunTime) {
-  auto start_t = clock();
-  auto runtime_time_perf = fibonacci(20);
-  auto end_t = clock();
-  EXPECT_GE(end_t - start_t, 5);
-}

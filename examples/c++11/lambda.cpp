@@ -45,3 +45,15 @@ TEST(Lambda, RecursiveLambda) {
 
   EXPECT_EQ(55, sum(1, 10));
 }
+
+TEST(Lambda, CapturedMembersToBeInitializedWithArbitraryExpressions) {
+  auto important = std::make_unique<int>(1);
+  auto add = [v1 = 1, v2 = std::move(important)](int x, int y) -> int { return x + y + v1 + (*v2); };
+  EXPECT_EQ(9, add(3, 4));
+}
+
+TEST(Lambda, Generic) {
+  auto generic = [](auto x, auto y) { return x + y; };
+  EXPECT_EQ(3, generic(1, 2));
+  EXPECT_FLOAT_EQ(3.3, generic(1.1, 2.2));
+}

@@ -7,3 +7,8 @@ C++11
 // std::move
 // std::forward
 // namespaces
+
+
+https://en.cppreference.com/w/cpp/language/string_literal
+https://en.cppreference.com/w/cpp/language/user_literal 
+boost::format
