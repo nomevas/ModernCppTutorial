@@ -53,7 +53,9 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "chrono": "cpp",
-        "ratio": "cpp"
+        "ratio": "cpp",
+        "forward_list": "cpp",
+        "unordered_set": "cpp"
     },
     "editor.tokenColorCustomizations": {
         "textMateRules": [
