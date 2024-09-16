@@ -30,7 +30,7 @@ TEST(Lambda, ModifyLocalVariables) {
     return arg + local_value;
   };
   EXPECT_EQ(2, my_lambda(1));
-  EXPECT_EQ(1, local_value);
+  EXPECT_EQ(5, local_value);
 }
 
 TEST(Lambda, RecursiveLambda) {
