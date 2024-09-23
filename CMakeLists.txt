@@ -12,12 +12,14 @@ set(CMAKE_CXX_STANDARD 20)
 enable_testing()
 
 # C++11 Features
+add_test(examples/c++11/array.cpp)
+add_test(examples/c++11/atomic.cpp)
 add_test(examples/c++11/auto.cpp)
 add_test(examples/c++11/bind.cpp)
 add_test(examples/c++11/constexpr.cpp)
-add_test(examples/c++11/containers.cpp)
 add_test(examples/c++11/decltype.cpp)
 add_test(examples/c++11/extern_template.cpp examples/c++11/helpers/extern_template_class.cpp)
+add_test(examples/c++11/forward_list.cpp)
 add_test(examples/c++11/future.cpp)
 add_test(examples/c++11/initializer_list.cpp)
 add_test(examples/c++11/lambda.cpp)
@@ -33,8 +35,13 @@ add_test(examples/c++11/smart_pointers.cpp)
 add_test(examples/c++11/strongly_typed_enumerations.cpp)
 add_test(examples/c++11/thread.cpp)
 add_test(examples/c++11/tuple.cpp)
+add_test(examples/c++11/unordered_map.cpp)
+add_test(examples/c++11/unordered_set.cpp)
 
 # C++17 Features
 add_test(examples/c++17/if_constexpr.cpp)
 add_test(examples/c++17/declaration_in_if.cpp)
 
+# C++ 20 features
+add_test(examples/C++20/jthread.cpp)
+add_test(examples/C++20/atomic.cpp)
