@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/cpp:1-debian-11
+FROM mcr.microsoft.com/devcontainers/cpp:bookworm
 
 ARG REINSTALL_CMAKE_VERSION_FROM_SOURCE="none"
 

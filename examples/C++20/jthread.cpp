@@ -1,5 +1,12 @@
+#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-TEST(JThread, TODO) { EXPECT_TRUE(false) << "Not implemented"; }
+#include <thread>
 
-// https://en.cppreference.com/w/cpp/atomic/atomic/wait
+using ::testing::MockFunction;
+
+TEST(JThread, JThread_AutoJoinOnDestroy) {
+  MockFunction<void()> threadEntryPoint;
+  EXPECT_CALL(threadEntryPoint, Call()).Times(1);
+  std::jthread{threadEntryPoint.AsStdFunction()};
+}
