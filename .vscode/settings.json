@@ -67,7 +67,10 @@
         "shared_mutex": "cpp",
         "numbers": "cpp",
         "semaphore": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "charconv": "cpp",
+        "format": "cpp",
+        "span": "cpp"
     },
     "editor.tokenColorCustomizations": {
         "textMateRules": [

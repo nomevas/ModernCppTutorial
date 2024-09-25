@@ -52,10 +52,10 @@ TEST(Mutex, SharedMutex_LockForWrite) {
 TEST(Mutex, UniqueLock_UnlocksTheMutexWhenObjectIsDestroyed) {
   std::mutex mutex;
   auto unique_lock = std::make_unique<std::unique_lock<std::mutex>>(mutex);
-  EXPECT_THROW(unique_lock->try_lock(), std::system_error) << "lock is already acquired by the unique lock";
+  EXPECT_THROW((void)unique_lock->try_lock(), std::system_error) << "lock is already acquired by the unique lock";
   unique_lock->unlock();
   EXPECT_TRUE(unique_lock->try_lock()) << "the mutex is released, try to acquire it once again";
-  EXPECT_THROW(unique_lock->try_lock(), std::system_error) << "lock is already acquired";
+  EXPECT_THROW((void)unique_lock->try_lock(), std::system_error) << "lock is already acquired";
   unique_lock.reset();
   EXPECT_TRUE(mutex.try_lock()) << "the unique lock is destroyed, the lock can be acquired again";
 }
@@ -63,10 +63,10 @@ TEST(Mutex, UniqueLock_UnlocksTheMutexWhenObjectIsDestroyed) {
 TEST(Mutex, SharedLock_TheSameAsUniqueLockButItUsesLockShared) {
   std::shared_mutex mutex;
   auto shared_lock = std::make_unique<std::shared_lock<std::shared_mutex>>(mutex);
-  EXPECT_THROW(shared_lock->try_lock(), std::system_error) << "lock is already acquired by the shared lock, just reading is allowed";
+  EXPECT_THROW((void)shared_lock->try_lock(), std::system_error) << "lock is already acquired by the shared lock, just reading is allowed";
   shared_lock->unlock();
   EXPECT_TRUE(shared_lock->try_lock()) << "the shared lock is destroyed, the lock can be acquired again";
-  EXPECT_THROW(shared_lock->try_lock(), std::system_error) << "lock is already acquired";
+  EXPECT_THROW((void)shared_lock->try_lock(), std::system_error) << "lock is already acquired";
   shared_lock.reset();
   EXPECT_TRUE(mutex.try_lock()) << "The mutex can be locked once again after destroying the shared lock object";
 }
