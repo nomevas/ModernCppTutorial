@@ -7,6 +7,6 @@ TEST(Decltype, CheckTypeUsingDecltype) {
   auto y = 2;
   decltype(x + y) z;
 
-  static_assert(std::is_same<decltype(x), int>::value, "type x == int");
-  static_assert(std::is_same<decltype(x), decltype(z)>::value, "type z == type x");
+  EXPECT_TRUE((std::is_same<decltype(x), int>::value)) << "type x == int";
+  EXPECT_TRUE((std::is_same<decltype(x), decltype(z)>::value)) << "type z == type x";
 }
