@@ -13,3 +13,23 @@ TEST(ConstExpr, EvaluateTheFucntionInCompileTime) {
   auto end_t = clock();
   EXPECT_LE(end_t - start_t, 5);
 }
+
+TEST(ConstExpr, ConstExprUserDefinedType) {
+  struct ConstExprType {
+    const char* string;
+    int intValue;
+  };
+ 
+  constexpr auto obj = ConstExprType{"0", 1};
+  static_assert("0" == obj.string);
+  static_assert(1 == obj.intValue);
+}
+
+TEST(ConstExpr, ConstExprFunctionThatReturnsString) {
+  constexpr auto constexprFunction = [](){
+    return std::string{"test"};
+  };
+ 
+  // std::string and std::vectors are supported in c++20
+  static_assert("test" == constexprFunction());
+}

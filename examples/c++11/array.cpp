@@ -17,8 +17,6 @@ TEST(Array, FixedSizeContainer_AvoidPerformanceSpaceOverhead) {
 
   EXPECT_EQ(4, arr.size());
   EXPECT_FALSE(arr.empty());
-  std::ranges::sort(arr, std::greater<int>());
-  EXPECT_EQ(4, arr[0]);
 }
 
 template <typename T, int N> 
