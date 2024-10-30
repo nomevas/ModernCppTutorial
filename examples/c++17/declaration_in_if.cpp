@@ -15,3 +15,14 @@ TEST(DeclarationVariableInIf, NominalCase) {
     EXPECT_TRUE(false);
   }
 }
+
+TEST(DeclarationVariableInIf, MultipleVariables) {
+  auto check_condition1 = []{return true;};
+  auto check_condition2 = []{return true;};
+
+  if (auto [condition1, condition2] = std::tuple{check_condition1(), check_condition2()}; condition1 && condition2) {
+    EXPECT_TRUE(true);
+  } else {
+    EXPECT_TRUE(false);
+  }
+}

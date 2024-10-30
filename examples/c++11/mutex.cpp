@@ -96,7 +96,7 @@ TEST(Mutex, ConditionalVariable_WaitUntilSomeoneElseTrigger) {
   bool ready = false;
   std::condition_variable condition_variable;
 
-  auto future = std::async(std::launch::async, [&]() {
+  [[maybe_unused]] auto future = std::async(std::launch::async, [&]() {
     std::this_thread::sleep_for(10ms);
     {
       // manual unlocking is done before notifying, to avoid waking up

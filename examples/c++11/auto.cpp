@@ -15,7 +15,7 @@ TEST(Auto, GenericLambdaExpressions) {
 
 TEST(Auto, GetTypeNameUsingTypeInfo) {
   std::vector<int> container = {1, 2, 3};
-  auto iter = container.begin();
+  [[maybe_unused]] auto iter = container.begin();
   EXPECT_THAT(typeid(iter).name(), MatchesRegex(".*iterator.*vector.*"));
 }
 

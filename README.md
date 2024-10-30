@@ -10,7 +10,32 @@ std::optional
 co-rutines
 -> streams...
 
+enable clang-tidy using pipelines
+
+or cmake 
+set(CMAKE_CXX_CLANG_TIDY 
+  clang-tidy;
+  -header-filter=.;
+  --warnings-as-errors=*;
+  -checks=bugprone-*,cert-*;)
+
+
 unamed namespaces...
 string view
 enum to string -werror 
+
+testing 
+fuzzing testing 
+    google 
+    rapid
+bdd 
+    cucamber-cpp
+
+review strategy
+ - multithread
+   - don't leave mutext locked when you get out of the scope calling external API
+   - don't capture this, local members. shared pointers
+
+
+
 ...

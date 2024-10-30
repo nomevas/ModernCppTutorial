@@ -7,7 +7,7 @@ include(cmake/add_test.cmake)
 
 find_package(Threads)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 
 enable_testing()
 
@@ -49,6 +49,12 @@ add_test(examples/c++17/if_constexpr.cpp)
 add_test(examples/c++17/declaration_in_if.cpp)
 
 # C++ 20 features
-add_test(examples/C++20/jthread.cpp)
-add_test(examples/C++20/atomic.cpp)
-add_test(examples/C++20/format.cpp)
+add_test(examples/c++20/atomic.cpp)
+add_test(examples/c++20/concept.cpp)
+add_test(examples/c++20/format.cpp)
+add_test(examples/c++20/jthread.cpp)
+add_test(examples/c++20/ranges.cpp)
+add_test(examples/c++20/span.cpp)
+
+# idioms
+add_test(examples/idioms/CRTP.cpp)
