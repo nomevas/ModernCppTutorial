@@ -1,0 +1,122 @@
+---
+# Configure clang-tidy for this project.
+
+# Here is an explanation for why some of the checks are disabled:
+#
+# -bugprone-exception-escape: false positives in MOCK methods with noexcept
+#
+# -bugprone-narrowing-conversions: too many false positives around
+#      `std::size_t`  vs. `*::difference_type`.
+#
+# -bugprone-unchecked-optional-access: too many false positives
+#
+# -cppcoreguidelines-avoid-const-or-ref-data-members: too strict for this moment
+#
+# -cppcoreguidelines-non-private-member-variables-in-classes: used for callback functions/tests
+#
+# -cppcoreguidelines-owning-memory: used in tests
+#
+# -misc-non-private-member-variables-in-classes: see cppcoreguidelines
+#
+# -misc-no-recursion: recursion is used in hierarchy of viewcontrollers
+#
+# -modernize-return-braced-init-list: hurts readability
+#
+# -modernize-use-default-member-init: leads to inconsistent member init
+#
+# -modernize-use-trailing-return-type: hurts readability
+#
+# -performance-move-const-arg: This warning requires the developer to
+#      know/care more about the implementation details of types/functions than
+#      should be necessary. For example, `A a; F(std::move(a));` will trigger a
+#      warning IFF `A` is a trivial type (and therefore the move is
+#      meaningless). It would also warn if `F` accepts by `const&`, which is
+#      another detail that the caller need not care about.
+#
+# -readability-identifier-length: Allow short variable names for loops/exceptions/variables
+#
+Checks: >
+  -*,
+  bugprone-*,
+  concurrency-*,
+  cppcoreguidelines-*,
+  google-*,
+  misc-*,
+  modernize-*,
+  performance-*,
+  portabililty-*,
+  readability-*,
+  -bugprone-exception-escape,
+  -bugprone-narrowing-conversions,
+  -bugprone-unchecked-optional-access,
+  -cppcoreguidelines-avoid-const-or-ref-data-members,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-non-private-member-variables-in-classes,
+  -cppcoreguidelines-owning-memory,
+  -misc-non-private-member-variables-in-classes,
+  -misc-no-recursion,
+  -modernize-return-braced-init-list,
+  -modernize-use-default-member-init,
+  -modernize-use-trailing-return-type,
+  -performance-move-const-arg
+
+# Turn all the warnings from the checks above into errors.
+WarningsAsErrors: "*"
+
+# only headers from Applications and Components directories
+# allow only one dot to filter out Sense composer files
+HeaderFilterRegex: "([.]+)?(Applications|Components)+[^.]+\\.(h|hpp)$"
+
+CheckOptions:
+  - { key: readability-identifier-naming.NamespaceCase,          value: CamelCase }
+  - { key: readability-identifier-naming.ClassCase,              value: CamelCase }
+  - { key: readability-identifier-naming.StructCase,             value: CamelCase }
+  - { key: readability-identifier-naming.TemplateParameterCase,  value: CamelCase }
+  - { key: readability-identifier-naming.TemplateParameterIgnoredRegexp, value: 'expr-type$' }
+  - { key: readability-identifier-naming.TemplateTemplateParameterCase,  value: CamelCase }
+  - { key: readability-identifier-naming.TypeTemplateParameterCase,  value: CamelCase }
+  - { key: readability-identifier-naming.TypeTemplateParameterIgnoredRegexp, value: 'expr-type$' }
+  - { key: readability-identifier-naming.TypedefCase,              value: CamelCase }
+  - { key: readability-identifier-naming.TypeAliasCase,            value: CamelCase }
+  - { key: readability-identifier-naming.TypeAliasIgnoredRegexp,   value: '[a-z|A-Z|_]*_t$|[a-z|_]*_type$|iterator_category$|reference$|pointer$' }
+  - { key: readability-identifier-naming.FunctionCase,             value: camelBack }
+  - { key: readability-identifier-naming.VariableCase,             value: camelBack }
+  - { key: readability-identifier-naming.ClassMethodCase,          value: camelBack }
+  - { key: readability-identifier-naming.ClassMemberCase,          value: camelBack }
+  - { key: readability-identifier-naming.StructMethodCase,         value: camelBack }
+  - { key: readability-identifier-naming.StructMemberCase,         value: camelBack }
+  - { key: readability-identifier-naming.ClassMemberSuffix,        value: _ }
+  - { key: readability-identifier-naming.PrivateMemberSuffix,      value: _ }
+  - { key: readability-identifier-naming.ProtectedMemberSuffix,    value: _ }
+  - { key: readability-identifier-naming.ParameterCase,            value: camelBack }
+  - { key: readability-identifier-naming.ParameterPackCase,        value: camelBack }
+  - { key: readability-identifier-naming.PointerParameterCase,     value: camelBack }
+  - { key: readability-identifier-naming.PrivateMemberCase,        value: camelBack }
+  - { key: readability-identifier-naming.ProtectedMemberCase,      value: camelBack }
+  - { key: readability-identifier-naming.EnumConstantCase,         value: CamelCase }
+  - { key: readability-identifier-naming.ConstexprFunctionCase,    value: camelBack }
+  - { key: readability-identifier-naming.ConstexprMethodCase,      value: camelBack }
+  - { key: readability-identifier-naming.ConstexprVariableCase,    value: CamelCase }
+  - { key: readability-identifier-naming.ConstexprVariablePrefix,  value: k }
+  - { key: readability-identifier-naming.GlobalConstantCase,       value: CamelCase }
+  - { key: readability-identifier-naming.GlobalConstantPrefix,     value: k }
+  - { key: readability-identifier-naming.MemberConstantCase,       value: CamelCase }
+  - { key: readability-identifier-naming.MemberConstantPrefix,     value: k }
+  - { key: readability-identifier-naming.StaticConstantCase,       value: CamelCase }
+  - { key: readability-identifier-naming.StaticConstantPrefix,     value: k }
+  - { key: readability-identifier-naming.VariableCase,             value: camelBack }
+  - { key: readability-identifier-naming.VirtualMethodCase,        value: camelBack }
+  - { key: readability-implicit-bool-conversion.AllowIntegerConditions, value: 1 }
+  - { key: readability-implicit-bool-conversion.AllowPointerConditions, value: 1 }
+  - { key: readability-braces-around-statements.ShortStatementLines,    value: 2 }
+  - { key: readability-function-cognitive-complexity.IgnoreMacros,      value: 1 }
+  - { key: readability-magic-numbers.IgnoredIntegerValues, value: '1;2;3;4;5;6;7;8;9;10;' }
+  - { key: readability-magic-numbers.IgnoredFloatingPointValues, value: '1.0;2.0;3.0;4.0;5.0;6.0;7.0;8.0;9.0;10.0;20.0;30.0;40.0;-100.0;' }
+  - { key: readability-identifier-length.IgnoredExceptionVariableNames, value: '^[e]$' }
+  - { key: readability-identifier-length.IgnoredLoopCounterNames,       value: '^[ijkv]$' }
+  - { key: readability-identifier-length.IgnoredParameterNames,         value: '^[fijklmnpv]$' }
+  - { key: readability-identifier-length.IgnoredVariableNames,          value: '^[fijklmnspv]$' }
+  - { key: readability-identifier-length.MinimumParameterNameLength,    value: 2 }
+  - { key: readability-identifier-length.MinimumVariableNameLength,     value: 2 }
+  - { key: bugprone-easily-swappable-parameters.MinimumLength,          value: 3 }
+  - { key: misc-include-cleaner.IgnoreHeaders, value: 'Windows.h;winnt.h;minwindef.h;winbase.h;shellapi.h;processenv.h;__msvc_chrono.hpp;xstring;Automation.h;' }

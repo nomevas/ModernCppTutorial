@@ -13,11 +13,7 @@ co-rutines
 enable clang-tidy using pipelines
 
 or cmake 
-set(CMAKE_CXX_CLANG_TIDY 
-  clang-tidy;
-  -header-filter=.;
-  --warnings-as-errors=*;
-  -checks=bugprone-*,cert-*;)
+
 
 
 unamed namespaces...

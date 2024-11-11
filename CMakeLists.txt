@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.18)
 
+option(USE_ASAN "Enable address sanitizer" OFF)
+option(USE_CLANG_TIDY "Enable clang tidy" OFF)
+
 project(ModernCppTutorial)
 
 include(GoogleTest)
@@ -45,6 +48,8 @@ add_test(examples/c++11/unordered_map.cpp)
 add_test(examples/c++11/unordered_set.cpp)
 
 # C++17 Features
+add_test(examples/c++17/any.cpp)
+add_test(examples/c++17/variant.cpp)
 add_test(examples/c++17/if_constexpr.cpp)
 add_test(examples/c++17/declaration_in_if.cpp)
 
